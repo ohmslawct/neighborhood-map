@@ -21,7 +21,6 @@ import { mailFolderListItems, otherMailFolderListItems } from './tileData';
 import escapeRegEx from 'escape-string-regexp'
 
 
-
 const styles = {
   root: {
     flexGrow: 1,
@@ -44,17 +43,10 @@ class MenuAppBar extends React.Component {
 
 
   toggleDrawer = (side, open) => () => {
-
     this.setState({
       [side]: open
     });
-
   };
-
-
-
-
-
 
 
   handleChange = (event, checked) => {
@@ -69,32 +61,21 @@ class MenuAppBar extends React.Component {
     this.setState({ anchorEl: null });
   };
 
-  render() {
-
-
+render() {
 
 let showingLocations;
 
-if (this.props.query.length > 0){
+if (this.props.query){
       const match = new RegExp(escapeRegEx(this.props.query), 'i')
       showingLocations = this.props.locations.filter((location) => match.test(location.title))
-      this.props.renderMarkersAgain();
-
 
     } else {
-      console.log("Query is blank:");
       showingLocations = this.props.locations;
 }
-
-
-
 
     const { classes } = this.props;
     const { auth, anchorEl } = this.state;
     const open = Boolean(anchorEl);
-
-
-
 
     const sideList = (
       <div>
@@ -102,7 +83,6 @@ if (this.props.query.length > 0){
    {
        showingLocations.map((menuItems) =>
        {
-
         return (<list>{menuItems.title}<br/></list>)
        })
 
@@ -112,35 +92,10 @@ if (this.props.query.length > 0){
       </div>
     );
 
-    const myText = (<div>Hiya Hiya</div>);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 return (
 <div className={classes.root}>
-
 
 <AppBar position="static">
     <Toolbar>
@@ -150,7 +105,7 @@ return (
     <MenuIcon/>
     </IconButton>
       <Typography variant="title" color="inherit" className={classes.flex}>
-      maps OF the WORLD
+new haven maps
       </Typography>
     </Toolbar>
 </AppBar>
@@ -172,7 +127,7 @@ placeholder= "Search"
 value= {this.props.query}
 onChange= { (event) => {
   this.props.updateQuery(event.target.value);
-  this.props.updatedFilteredLocations(showingLocations);
+
 }
 }
 />
@@ -181,25 +136,9 @@ onChange= { (event) => {
 onClick={this.props.clearQuery}
 >Reset</Button>
 
-
-
-
 {sideList}
 
-
-
-
-
-
 </Drawer>
-
-
-
-
-
-
-
-
 
 
 </div>
