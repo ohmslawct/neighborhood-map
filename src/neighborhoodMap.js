@@ -54,6 +54,13 @@ state = {
     query : ""
   }
 
+
+handleChange = (event, checked) => {
+  this.setState({ auth: checked });
+};
+
+
+
 render() {
 
 const style = {
@@ -69,12 +76,15 @@ return (<div>
       updateQuery = {this.props.updateQuery}
       clearQuery = {this.props.clearQuery}
       updatedFilteredLocations = {this.props.updatedFilteredLocations}
+      infoWindowStatus = {this.props.infoWindowStatus}
 />
 
 <MapContainer
      style={style}
      filteredLocationsOnly = {this.props.filteredLocationsOnly}
      locations = {this.props.locations}
+     showInfoWindowNow = {this.props.showInfoWindowNow}
+     closeInfoWindowNow = {this.props.closeInfoWindowNow}
 />
 
 

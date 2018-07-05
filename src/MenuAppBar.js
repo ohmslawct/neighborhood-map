@@ -105,7 +105,9 @@ return (
     <MenuIcon/>
     </IconButton>
       <Typography variant="title" color="inherit" className={classes.flex}>
-new haven maps
+
+      React Maps Project
+
       </Typography>
     </Toolbar>
 </AppBar>
