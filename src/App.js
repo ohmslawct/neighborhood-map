@@ -4,7 +4,6 @@ import './css/Custom.css';
 import NeighborhoodMap from './neighborhoodMap';
 import 'typeface-roboto';
 import escapeRegEx from 'escape-string-regexp';
-import { Route } from 'react-router-dom';
 
 class App extends Component {
 
@@ -103,9 +102,20 @@ showInfoWindowNow(locationSelected){
     this.updateInfoWindowContentAgain(myKey);
 
 
+// THIS DODGEY CODE WORKS
     this.state.locations[myKey].infoWindowStatus = true;
     this.forceUpdate()
-}
+
+
+// THIS REPLACEMENT CODE THROWS AN ERROR:
+// Syntax error: Unexpected token, expected , (113:15)
+    // this.setState({
+    //   locations[myKey].infoWindowStatus : true
+    // })
+// PLEASE ADVISE HOW TO FIX.
+
+
+} //showInfoWindowNow
 
 // Close Info Window on Google Map
 closeInfoWindowNow(locationSelected){
@@ -157,11 +167,24 @@ function requestError(error, part) {
    console.log("Error: ", error);
 }
 
+
+
+
+
+
 content.then( content => {
   this.state.locations[myKey].infoWindow.content = (contentForLocation);
   this.state.locations[myKey].infoWindow.contentUrl = contentUrl;
   this.forceUpdate()
 }
+
+
+
+
+
+
+
+
 
 
 )} // getInfoWindowContent
@@ -200,7 +223,7 @@ render() {
  return (
   <div className="App">
 
-    <Route exact path="/" render={({history}) => (
+
         <NeighborhoodMap
         menuOpen = {this.state.menuOpen}
         locations = {this.state.locations}
@@ -229,7 +252,7 @@ render() {
         infoWindow = {this.state.infoWindow}
         />
 
-      )}/>
+
 
    </div>
 

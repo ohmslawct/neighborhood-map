@@ -71,7 +71,8 @@ if (this.props.query){
        showingLocations.map((menuItems) =>
        {
         return (
-          <list
+          <ul
+            key={menuItems.key}
             role="link"
             onClick={
 
@@ -80,7 +81,7 @@ if (this.props.query){
           >
               {menuItems.title}
               <br/>
-          </list>)
+          </ul>)
        })
 
    }
@@ -112,8 +113,8 @@ return (
 
 <Drawer open={this.state.left} onClose={this.toggleDrawer('left', false)}>
 
-<header class="drawer__header">
-    <div class="drawer__header-content">
+<header className="drawer__header">
+    <div className="drawer__header-content">
       Locations:
     </div>
 </header>

@@ -16,12 +16,17 @@ To load locally, download the repository, install dependencies using *npm instal
 
 * Yarn is a package manager built by Facebook [Download Yarn](https://yarnpkg.com/en/docs/install)
 
+* Build the application: npm run build
+
+* Run the built application locally: serve -s build
+
 
 ##### Instructions
 Select a marker on the map to view related news headlines from the New York Times.  Use Menu Bar Search field to filter locations.  Click on a location description to view information.
 
 #####  Miscellany
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+* Service Worker: The project uses the default react Service Worker. This service worker works only in production mode.
+* This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 
 #####  Important

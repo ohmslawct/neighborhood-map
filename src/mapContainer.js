@@ -21,7 +21,7 @@ export class MapContainer extends Component {
   renderInfoWindow(myMarker) {
     return (this.props.filteredLocationsOnly.map(location => {
 
-      return (<InfoWindow title={location.title} position={location.position} visible={location.infoWindowStatus} onClose={() => {
+      return (<InfoWindow key={location.key} title={location.title} position={location.position} visible={location.infoWindowStatus} onClose={() => {
           location.infoWindowStatus = false;
           this.forceUpdate()
         }
@@ -40,7 +40,7 @@ export class MapContainer extends Component {
 
   renderMarkers() {
     return (this.props.filteredLocationsOnly.map(location => {
-      return (<Marker animation={this.props.google.maps.Animation.DROP} title={location.title} position={location.position} onClick={this.onMarkerClick} name={location.title}/>)
+      return (<Marker key={location.key} animation={this.props.google.maps.Animation.DROP} title={location.title} position={location.position} onClick={this.onMarkerClick} name={location.title}/>)
     }))
   };
 
