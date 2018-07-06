@@ -6,20 +6,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import LeftDrawer from './LeftDrawer';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import { mailFolderListItems, otherMailFolderListItems } from './tileData';
 import escapeRegEx from 'escape-string-regexp'
-
 
 const styles = {
   root: {
@@ -48,7 +37,6 @@ class MenuAppBar extends React.Component {
     });
   };
 
-
   handleChange = (event, checked) => {
     this.setState({ auth: checked });
   };
@@ -74,16 +62,25 @@ if (this.props.query){
 }
 
     const { classes } = this.props;
-    const { auth, anchorEl } = this.state;
-    const open = Boolean(anchorEl);
-
+    // const { auth, anchorEl } = this.state;
+    // const open = Boolean(anchorEl);
     const sideList = (
       <div>
 
    {
        showingLocations.map((menuItems) =>
        {
-        return (<list>{menuItems.title}<br/></list>)
+        return (
+          <list
+            role="link"
+            onClick={
+
+              () => {this.props.showInfoWindowNow(menuItems)}
+            }
+          >
+              {menuItems.title}
+              <br/>
+          </list>)
        })
 
    }

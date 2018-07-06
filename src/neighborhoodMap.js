@@ -1,48 +1,48 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
-import PropTypes from 'prop-types'
-import Typography from '@material-ui/core/Typography';
-import Toolbar from '@material-ui/core/Toolbar';
-import Delete from '@material-ui/icons/Delete';
-import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ButtonAppBar from './ButtonAppBar.js';
+// import {Link} from 'react-router-dom'
+// import PropTypes from 'prop-types'
+// import Typography from '@material-ui/core/Typography';
+// import Toolbar from '@material-ui/core/Toolbar';
+// import Delete from '@material-ui/icons/Delete';
+// import classNames from 'classnames';
+// import { withStyles } from '@material-ui/core/styles';
+// import Drawer from '@material-ui/core/Drawer';
+// import Button from '@material-ui/core/Button';
+// import List from '@material-ui/core/List';
+// import Divider from '@material-ui/core/Divider';
+// import ButtonAppBar from './ButtonAppBar.js';
 import MenuAppBar from './MenuAppBar.js';
-import LeftDrawer from './LeftDrawer';
-import escapeRegEx from 'escape-string-regexp'
-import GoogleMapReact from 'google-map-react';
-import {GoogleApiWrapper} from 'google-maps-react';
+// import LeftDrawer from './LeftDrawer';
+// import escapeRegEx from 'escape-string-regexp'
+// import GoogleMapReact from 'google-map-react';
+// import {GoogleApiWrapper} from 'google-maps-react';
 import MapContainer from './mapContainer.js';
 
 
-const propTypes = {
-  locations : PropTypes.array
-};
+// const propTypes = {
+//   locations : PropTypes.array
+// };
 
-const styles = theme => ({
-  button: {
-    margin: theme.spacing.unit,
-  },
-  leftIcon: {
-    marginRight: theme.spacing.unit,
-  },
-  rightIcon: {
-    marginLeft: theme.spacing.unit,
-  },
-  iconSmall: {
-    fontSize: 20,
-  },
-  list: {
-    width: 250,
-  },
-  fullList: {
-    width: 'auto',
-  },
-});
+// const styles = theme => ({
+//   button: {
+//     margin: theme.spacing.unit,
+//   },
+//   leftIcon: {
+//     marginRight: theme.spacing.unit,
+//   },
+//   rightIcon: {
+//     marginLeft: theme.spacing.unit,
+//   },
+//   iconSmall: {
+//     fontSize: 20,
+//   },
+//   list: {
+//     width: 250,
+//   },
+//   fullList: {
+//     width: 'auto',
+//   },
+// });
 
 
 class NeighborhoodMap extends Component {
@@ -77,6 +77,7 @@ return (<div>
       clearQuery = {this.props.clearQuery}
       updatedFilteredLocations = {this.props.updatedFilteredLocations}
       infoWindowStatus = {this.props.infoWindowStatus}
+      showInfoWindowNow = {this.props.showInfoWindowNow}
 />
 
 <MapContainer

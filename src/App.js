@@ -2,13 +2,9 @@ import React, { Component } from 'react';
 import './css/App.css';
 import './css/Custom.css';
 import NeighborhoodMap from './neighborhoodMap';
-import Map from './mapComponent';
-import GoogleMapReact from 'google-map-react';
 import 'typeface-roboto';
 import escapeRegEx from 'escape-string-regexp';
 import { Route } from 'react-router-dom';
-//import update from 'react-addons-update';
-
 
 class App extends Component {
 
@@ -79,7 +75,7 @@ state = {
         key : 4,
         infoWindow :
             {
-              content : "Loading...",
+              content : ["Loading" , "..."],
               contentUrl : ""
             }
         }
@@ -94,14 +90,15 @@ this.setState({
 
 }
 
+// Launches Info Window on Google Map
 showInfoWindowNow(locationSelected){
     let myKey;
 
-    let matchingLocation = this.state.locations.filter( (location) =>{
-       if (locationSelected.name == location.title){
+    this.state.locations.filter( (location) =>{
+       if (locationSelected.name === location.title || locationSelected.title === location.title){
          myKey = location.key;
          return location
-       } else return;
+       }
     } );
     this.updateInfoWindowContentAgain(myKey);
 
@@ -110,14 +107,17 @@ showInfoWindowNow(locationSelected){
     this.forceUpdate()
 }
 
+// Close Info Window on Google Map
 closeInfoWindowNow(locationSelected){
   this.forceUpdate()
 }
 
+// Update Content for Info Window
 updateInfoWindowContentAgain(myKey){
   return this.getInfoWindowContent(this.state.locations[myKey].title, myKey);
 }
 
+// Update Content for Info Window sub-function
 getInfoWindowContent(searchTerm, myKey){
 var nytAuthKey = "3d6801dab968446787ea71d5042ad8f7";
 var myNewYorkTimesUrl = `https://api.nytimes.com/svc/search/v2/articlesearch.json?&api-key=${nytAuthKey}&q=${searchTerm}`
@@ -133,42 +133,34 @@ let content = fetch(myNewYorkTimesUrl)
  )
  .catch(error => requestError(error, 'articles'));
 
-
+// add text from fetch request
 function addArticles(data){
   if (data.response && data.response.docs && data.response.docs.length > 1){
     const articles = data.response.docs;
-    var content, contentUrl;
+    // var content, contentUrl;
     let infoWindow  = {};
 
       articles.map(article => {
 
           infoWindow.content = `${article.snippet}`;
           infoWindow.contentUrl = `${article.web_url}`;
-
           contentForLocation = `${article.snippet}`;
           contentUrl = `${article.web_url}`;
-
           return infoWindow;
-        //  return contentForLocation = `${article.snippet}`;
-         // contentUrl = `${article.web_url}`;
-         // console.log("content url", article.web_url)
     });
   }
-//  return content;
 }  //addArticles
 
 
-
+// Handle Errors
 function requestError(error, part) {
-  // console.log("Error: ", error);
+   console.log("Error: ", error);
 }
 
-
 content.then( content => {
-  this.state.locations[myKey].infoWindow.content = contentForLocation;
+  this.state.locations[myKey].infoWindow.content = (contentForLocation);
   this.state.locations[myKey].infoWindow.contentUrl = contentUrl;
   this.forceUpdate()
-  // update setState
 }
 
 
@@ -188,7 +180,8 @@ filterLocations(query){
 }  // end filterLocations
 
 clearQuery = () => {
-        this.setState({query : ''})
+        this.setState({query : ''});
+
 }
 
 updateQuery = (query) => {
@@ -196,18 +189,18 @@ updateQuery = (query) => {
           this.filterLocations(query);
 }
 
-updatedFilteredLocations(updatedLocationList){
-    // console.log("List Updating", updatedLocationList);
-    // this.setState({
-    //   filteredLocationsOnly : updatedLocationList
-    // })
-}
+// updatedFilteredLocations(updatedLocationList){
+//     // console.log("List Updating", updatedLocationList);
+//     // this.setState({
+//     //   filteredLocationsOnly : updatedLocationList
+//     // })
+// }
 
 render() {
  return (
   <div className="App">
 
-    <Route exact path="/" render={() => (
+    <Route exact path="/" render={({history}) => (
         <NeighborhoodMap
         menuOpen = {this.state.menuOpen}
         locations = {this.state.locations}
@@ -222,7 +215,7 @@ render() {
         filterLocations = { (query) => {
           this.filterLocations(query)
         }}
-        filteredLocationsOnly = {this.state.filteredLocationsOnly}
+
         infoWindowStatus = {this.state.infoWindowStatus}
         showInfoWindowNow = { (location) => {
           this.showInfoWindowNow(location)

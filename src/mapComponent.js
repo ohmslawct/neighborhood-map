@@ -1,11 +1,9 @@
 
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
-import PropTypes from 'prop-types'
+// import {Link} from 'react-router-dom'
+// import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
-const propTypes = {
-};
 
 
 export class Map extends React.Component {
@@ -54,7 +52,7 @@ export class Map extends React.Component {
   render() {
     return (
       <div ref='map'>
-      
+
       </div>
     )
   }
