@@ -4,8 +4,10 @@ import './css/Custom.css';
 import NeighborhoodMap from './neighborhoodMap';
 import 'typeface-roboto';
 import escapeRegEx from 'escape-string-regexp';
+import update from 'immutability-helper';
 
 class App extends Component {
+
 
 state = {
   screen : "/",
@@ -81,11 +83,16 @@ state = {
     ]
 }
 
+// TODO: separate data into external data file.
+
+
 componentDidMount(){
 
 this.setState({
     filteredLocationsOnly : this.state.locations
   })
+
+
 
 }
 
@@ -102,20 +109,38 @@ showInfoWindowNow(locationSelected){
     this.updateInfoWindowContentAgain(myKey);
 
 
+// // THIS CODE DOES NOT WORK AT ALL
+// this.setState({ locations[myKey].infoWindowStatus : true })
+
+
+// // THIS CODE DOESN'T SHOW THE INFO WINDOW
+// console.log("Status: ", this.state.locations[myKey].infoWindowStatus);
+// const tempLocations = [...this.state.locations];
+// tempLocations[myKey] = { ...tempLocations[myKey], infoWindowStatus: true };
+//
+//  this.setState(
+//        {
+//          locations: tempLocations
+//        }
+//  );
+// console.log("Status Now: ", this.state.locations[myKey].infoWindowStatus);
+
+
 // THIS DODGEY CODE WORKS
-    this.state.locations[myKey].infoWindowStatus = true;
-    this.forceUpdate()
+// ATTN: REVIWER: IF YOU REJECT THIS CODE, PLEASE PROVIDE GUIDANCE ON A SOLUTION BECUASE I'VE TRIED AND CAN'T FITURE IT OUT.
+// E.G. https://stackoverflow.com/questions/51250518
 
-
-// THIS REPLACEMENT CODE THROWS AN ERROR:
-// Syntax error: Unexpected token, expected , (113:15)
-    // this.setState({
-    //   locations[myKey].infoWindowStatus : true
-    // })
-// PLEASE ADVISE HOW TO FIX.
+this.state.locations[myKey].infoWindowStatus = true;
+this.forceUpdate()
 
 
 } //showInfoWindowNow
+
+
+
+
+
+
 
 // Close Info Window on Google Map
 closeInfoWindowNow(locationSelected){

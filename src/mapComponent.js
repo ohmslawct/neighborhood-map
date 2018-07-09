@@ -10,8 +10,10 @@ export class Map extends React.Component {
 
     componentDidMount(){
       console.log("Component Did Mount!");
-      this.loadMap();
-
+      this.loadMap()
+      .catch(error => {
+            console.log("Load Map Error: ", error);
+        }
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -20,9 +22,12 @@ export class Map extends React.Component {
       }
     }
 
+
+
+
     loadMap() {
-    console.log("loadMap Executing");
-    console.log(this.props);
+    // console.log("loadMap Executing");
+    // console.log(this.props);
 
     // check if google is available
     if (this.props && this.props.google)
@@ -51,8 +56,9 @@ export class Map extends React.Component {
 
   render() {
     return (
-      <div ref='map'>
-
+      <div
+        ref='map'
+        role='application'>
       </div>
     )
   }

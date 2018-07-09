@@ -10,6 +10,9 @@ import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
 import escapeRegEx from 'escape-string-regexp'
 
+
+//TODO: Move styles into global CSS.
+
 const styles = {
   root: {
     flexGrow: 1,
@@ -74,6 +77,7 @@ if (this.props.query){
           <ul
             key={menuItems.key}
             role="link"
+            tabIndex="0"
             onClick={
 
               () => {this.props.showInfoWindowNow(menuItems)}
@@ -120,6 +124,7 @@ return (
 </header>
 
 <input
+autoFocus="on"
 className= "menuFilterInput"
 type= "text"
 id="menuFilterInputBox"
