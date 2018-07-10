@@ -16,6 +16,12 @@ handleChange = (event, checked) => {
   this.setState({ auth: checked });
 };
 
+// renderMarkers() {
+//   return (this.props.filteredLocationsOnly.map(location => {
+//     return (<Marker key={location.key} animation={this.props.google.maps.Animation.DROP} title={location.title} position={location.position} onClick={this.onMarkerClick} name={location.title}/>)
+//   }))
+// };
+
 
 
 render() {
@@ -35,6 +41,7 @@ return (<div key={this.props.locations.key}>
       updatedFilteredLocations = {this.props.updatedFilteredLocations}
       infoWindowStatus = {this.props.infoWindowStatus}
       showInfoWindowNow = {this.props.showInfoWindowNow}
+      rerenderMarkers = {this.rerenderMarkers}
 />
 
 <MapContainer

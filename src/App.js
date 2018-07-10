@@ -8,7 +8,6 @@ import update from 'immutability-helper';
 
 class App extends Component {
 
-
 state = {
   screen : "/",
   menuOpen : true,
@@ -20,12 +19,12 @@ state = {
         position: {lat: 41.3029876, lng: -72.9191306},
         title: "Pepe's Pizza",
         mappy: '',
-        infoWindowStatus: false,
         key : 0,
         infoWindow :
             {
               content : "Loading...",
-              contentUrl : ""
+              contentUrl : "",
+              infoWindowStatus: false
             }
         },
 
@@ -33,25 +32,25 @@ state = {
         position: {lat: 41.307532, lng: -72.9211548},
         title: "Lucibello's Bakery",
         mappy: '',
-        infoWindowStatus: false,
-        key : 1,
+        key: 1,
         infoWindow :
             {
               content : "Loading...",
-              contentUrl : ""
+              contentUrl : "",
+              infoWindowStatus : false
             }
         },
 
         {
         position: {lat: 41.3083454, lng: -72.9195059},
-        title: 'Present & Perform',
-        mappy: '',
-        infoWindowStatus: false,
+        title: "Present & Perform",
+        mappy: "",
         key : 2,
         infoWindow :
             {
               content : "Loading...",
-              contentUrl : ""
+              contentUrl : "",
+              infoWindowStatus : false
             }
         },
 
@@ -64,7 +63,8 @@ state = {
         infoWindow :
             {
               content : "Loading...",
-              contentUrl : ""
+              contentUrl : "",
+              infoWindowStatus: false
             }
         },
 
@@ -72,12 +72,12 @@ state = {
         position: {lat: 41.3069746, lng: -72.9219505},
         title: 'New Haven Fire Station',
         mappy: '',
-        infoWindowStatus: false,
         key : 4,
         infoWindow :
             {
               content : ["Loading" , "..."],
-              contentUrl : ""
+              contentUrl : "",
+              infoWindowStatus: false
             }
         }
     ]
@@ -85,15 +85,11 @@ state = {
 
 // TODO: separate data into external data file.
 
-
 componentDidMount(){
 
 this.setState({
     filteredLocationsOnly : this.state.locations
   })
-
-
-
 }
 
 // Launches Info Window on Google Map
@@ -108,38 +104,21 @@ showInfoWindowNow(locationSelected){
     } );
     this.updateInfoWindowContentAgain(myKey);
 
+const updatedLocations = [...this.state.locations];
+updatedLocations[myKey].infoWindow = { ...updatedLocations[myKey].infoWindow, infoWindowStatus: true };
 
-// // THIS CODE DOES NOT WORK AT ALL
-// this.setState({ locations[myKey].infoWindowStatus : true })
+ this.setState(
+       {
+         locations: updatedLocations
+       }
+ );
 
-
-// // THIS CODE DOESN'T SHOW THE INFO WINDOW
-// console.log("Status: ", this.state.locations[myKey].infoWindowStatus);
-// const tempLocations = [...this.state.locations];
-// tempLocations[myKey] = { ...tempLocations[myKey], infoWindowStatus: true };
-//
-//  this.setState(
-//        {
-//          locations: tempLocations
-//        }
-//  );
-// console.log("Status Now: ", this.state.locations[myKey].infoWindowStatus);
-
-
-// THIS DODGEY CODE WORKS
-// ATTN: REVIWER: IF YOU REJECT THIS CODE, PLEASE PROVIDE GUIDANCE ON A SOLUTION BECUASE I'VE TRIED AND CAN'T FITURE IT OUT.
-// E.G. https://stackoverflow.com/questions/51250518
-
-this.state.locations[myKey].infoWindowStatus = true;
-this.forceUpdate()
-
+// THIS DODGEY CODE WORKS BUT MUTATES STATE DIRECLTY
+// https://stackoverflow.com/questions/51250518
+// this.state.locations[myKey].infoWindow.infoWindowStatus = true;
+// this.forceUpdate()
 
 } //showInfoWindowNow
-
-
-
-
-
 
 
 // Close Info Window on Google Map
@@ -176,7 +155,6 @@ function addArticles(data){
     let infoWindow  = {};
 
       articles.map(article => {
-
           infoWindow.content = `${article.snippet}`;
           infoWindow.contentUrl = `${article.web_url}`;
           contentForLocation = `${article.snippet}`;
@@ -193,23 +171,11 @@ function requestError(error, part) {
 }
 
 
-
-
-
-
 content.then( content => {
   this.state.locations[myKey].infoWindow.content = (contentForLocation);
   this.state.locations[myKey].infoWindow.contentUrl = contentUrl;
   this.forceUpdate()
 }
-
-
-
-
-
-
-
-
 
 
 )} // getInfoWindowContent
@@ -237,18 +203,10 @@ updateQuery = (query) => {
           this.filterLocations(query);
 }
 
-// updatedFilteredLocations(updatedLocationList){
-//     // console.log("List Updating", updatedLocationList);
-//     // this.setState({
-//     //   filteredLocationsOnly : updatedLocationList
-//     // })
-// }
 
 render() {
  return (
   <div className="App">
-
-
         <NeighborhoodMap
         menuOpen = {this.state.menuOpen}
         locations = {this.state.locations}
@@ -264,7 +222,6 @@ render() {
           this.filterLocations(query)
         }}
 
-        infoWindowStatus = {this.state.infoWindowStatus}
         showInfoWindowNow = { (location) => {
           this.showInfoWindowNow(location)
         }}
@@ -276,9 +233,6 @@ render() {
         }}
         infoWindow = {this.state.infoWindow}
         />
-
-
-
    </div>
 
     ) // return

@@ -21,8 +21,13 @@ export class MapContainer extends Component {
   renderInfoWindow(myMarker) {
     return (this.props.filteredLocationsOnly.map(location => {
 
-      return (<InfoWindow key={location.key} title={location.title} position={location.position} visible={location.infoWindowStatus} onClose={() => {
-          location.infoWindowStatus = false;
+      return (<InfoWindow
+        key={location.key}
+        title={location.title}
+        position={location.position}
+        visible={location.infoWindow.infoWindowStatus}
+        onClose={() => {
+          location.infoWindow.infoWindowStatus = false;
           this.forceUpdate()
         }
 }>
@@ -47,7 +52,10 @@ export class MapContainer extends Component {
   render() {
     return (<div>
 
-      <Map google={this.props.google} zoom={15} style={this.props.style} initialCenter={{
+      <Map google={this.props.google}
+           zoom={15}
+           style={this.props.style}
+           initialCenter={{
           lat: 41.3076822,
           lng: -72.9259595
         }}>

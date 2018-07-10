@@ -67,32 +67,28 @@ if (this.props.query){
     const { classes } = this.props;
     // const { auth, anchorEl } = this.state;
     // const open = Boolean(anchorEl);
-    const sideList = (
-      <div>
+    const sideList =
+        (<div>{
+                   showingLocations.map((menuItems) =>
+                   {
+                    return (
+                      <ul
+                        key={menuItems.key}
+                        role="link"
+                        tabIndex="0"
+                        onClick={
+                          () => {
+                            this.props.showInfoWindowNow(menuItems)
+                  
+                          }
+                        }
+                      >
+                          {menuItems.title}
+                          <br/>
+                      </ul>)
+                   })
 
-   {
-       showingLocations.map((menuItems) =>
-       {
-        return (
-          <ul
-            key={menuItems.key}
-            role="link"
-            tabIndex="0"
-            onClick={
-
-              () => {this.props.showInfoWindowNow(menuItems)}
-            }
-          >
-              {menuItems.title}
-              <br/>
-          </ul>)
-       })
-
-   }
-
-
-      </div>
-    );
+        }</div>);
 
 
 

@@ -1,0 +1,73 @@
+{
+  "screen" : "/",
+  "menuOpen" : true,
+  "filteredLocationsOnly" : [],
+  "query" : "",
+  "mapChangedFlag" : false,
+  "locations" : [
+        {
+        "position": {"lat": 41.3029876, "lng": -72.9191306},
+        "title": "Pepe's Pizza",
+        "mappy": "",
+        "infoWindowStatus": false,
+        "key" : 0,
+        "infoWindow" :
+            {
+              "content" : "Loading...",
+              "contentUrl" : ""
+            }
+        },
+
+        {
+        "position": {"lat": 41.307532, "lng": -72.9211548},
+        "title": "Lucibello's Bakery",
+        "mappy": "",
+        "infoWindowStatus": false,
+        "key" : 0,
+        "infoWindow" :
+            {
+              "content" : "Loading...",
+              "contentUrl" : ""
+            }
+        },
+
+        {
+        "position": {"lat": 41.3083454, "lng": -72.9195059},
+        "title": "Present & Perform",
+        "mappy": "",
+        "infoWindowStatus": false,
+        "key" : 0,
+        "infoWindow" :
+            {
+              "content" : "Loading...",
+              "contentUrl" : ""
+            }
+        },
+
+        {
+        "position": {"lat": 41.30839, "lng": -72.9331467},
+        "title": "Yale Art Gallery",
+        "mappy": "",
+        "infoWindowStatus": false,
+        "key" : 0,
+        "infoWindow" :
+            {
+              "content" : "Loading...",
+              "contentUrl" : ""
+            }
+        },
+
+        {
+        "position": {"lat": 41.3069746, "lng": -72.9219505},
+        "title": "New Haven Fire Station",
+        "mappy": "",
+        "infoWindowStatus": false,
+        "key" : 0,
+        "infoWindow" :
+            {
+              "content" : "Loading...",
+              "contentUrl" : ""
+            }
+        }
+    ]
+}
