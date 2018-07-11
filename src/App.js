@@ -92,6 +92,24 @@ state = {
 
 componentDidMount(){
 
+function getData(){
+
+   fetch("./data/initializeState.json").then( (response) => {
+         console.log("Fetching");
+         return response.json();
+    }).then( (response) =>{
+      console.log(response);
+    }).catch( (error) =>{
+      console.log(error);
+    })
+  }
+
+
+
+getData();
+
+
+
 this.setState({
     filteredLocationsOnly : this.state.locations
   })
