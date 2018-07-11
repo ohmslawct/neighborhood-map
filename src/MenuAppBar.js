@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import escapeRegEx from 'escape-string-regexp'
 
 
+
 //TODO: Move styles into global CSS.
 
 const styles = {
@@ -30,7 +31,8 @@ class MenuAppBar extends React.Component {
   state = {
     auth: true,
     anchorEl: null,
-    left: false
+    left: false,
+    myMarker : {}
   };
 
 
@@ -59,14 +61,11 @@ let showingLocations;
 if (this.props.query){
       const match = new RegExp(escapeRegEx(this.props.query), 'i')
       showingLocations = this.props.locations.filter((location) => match.test(location.title))
-
     } else {
       showingLocations = this.props.locations;
 }
 
     const { classes } = this.props;
-    // const { auth, anchorEl } = this.state;
-    // const open = Boolean(anchorEl);
     const sideList =
         (<div>{
                    showingLocations.map((menuItems) =>
@@ -79,7 +78,7 @@ if (this.props.query){
                         onClick={
                           () => {
                             this.props.showInfoWindowNow(menuItems)
-                  
+                            this.props.renderMarkers(menuItems)
                           }
                         }
                       >
@@ -128,8 +127,7 @@ placeholder= "Search"
 value= {this.props.query}
 onChange= { (event) => {
   this.props.updateQuery(event.target.value);
-
-}
+  }
 }
 />
 

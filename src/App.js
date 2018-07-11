@@ -4,12 +4,12 @@ import './css/Custom.css';
 import NeighborhoodMap from './neighborhoodMap';
 import 'typeface-roboto';
 import escapeRegEx from 'escape-string-regexp';
-import update from 'immutability-helper';
 
 class App extends Component {
 
 state = {
   screen : "/",
+  myAnimation : true,
   menuOpen : true,
   filteredLocationsOnly : [],
   query : ' ',
@@ -24,7 +24,8 @@ state = {
             {
               content : "Loading...",
               contentUrl : "",
-              infoWindowStatus: false
+              infoWindowStatus: false,
+              animation : "BOUNCE"
             }
         },
 
@@ -37,7 +38,8 @@ state = {
             {
               content : "Loading...",
               contentUrl : "",
-              infoWindowStatus : false
+              infoWindowStatus : false,
+              animation : "BOUNCE"
             }
         },
 
@@ -50,7 +52,8 @@ state = {
             {
               content : "Loading...",
               contentUrl : "",
-              infoWindowStatus : false
+              infoWindowStatus : false,
+              animation : "BOUNCE"
             }
         },
 
@@ -64,7 +67,8 @@ state = {
             {
               content : "Loading...",
               contentUrl : "",
-              infoWindowStatus: false
+              infoWindowStatus: false,
+              animation : "BOUNCE"
             }
         },
 
@@ -77,7 +81,8 @@ state = {
             {
               content : ["Loading" , "..."],
               contentUrl : "",
-              infoWindowStatus: false
+              infoWindowStatus: false,
+              animation : "BOUNCE"
             }
         }
     ]
@@ -109,7 +114,8 @@ updatedLocations[myKey].infoWindow = { ...updatedLocations[myKey].infoWindow, in
 
  this.setState(
        {
-         locations: updatedLocations
+         locations: updatedLocations,
+         myAnimation : true
        }
  );
 
@@ -139,13 +145,37 @@ var myNewYorkTimesUrl = `https://api.nytimes.com/svc/search/v2/articlesearch.jso
 var contentForLocation;
 var contentUrl;
 
-let content = fetch(myNewYorkTimesUrl)
+fetch(myNewYorkTimesUrl)
   .then(response => response.json() )
     .then(data => {
         return addArticles(data);
   }
- )
- .catch(error => requestError(error, 'articles'));
+ ).then( content => {
+
+
+ const updatedLocations = [...this.state.locations];
+ updatedLocations[myKey].infoWindow = { ...updatedLocations[myKey].infoWindow, content: contentForLocation };
+ updatedLocations[myKey].infoWindow = { ...updatedLocations[myKey].infoWindow, contentUrl: contentUrl };
+  this.setState(
+        {
+          locations: updatedLocations
+        }
+  )
+ }
+ ).catch(error => {
+         console.log("Error: ", error);
+           const updatedLocations = [...this.state.locations];
+           updatedLocations[myKey].infoWindow = { ...updatedLocations[myKey].infoWindow, content: "Content Not Available - Try Again Later" };
+           updatedLocations[myKey].infoWindow = { ...updatedLocations[myKey].infoWindow, contentUrl: "No Link For You!" };
+
+            this.setState(
+                  {
+                    locations: updatedLocations
+                  }
+            );
+            console.log(this.state.locations);
+ });
+
 
 // add text from fetch request
 function addArticles(data){
@@ -164,21 +194,7 @@ function addArticles(data){
   }
 }  //addArticles
 
-
-// Handle Errors
-function requestError(error, part) {
-   console.log("Error: ", error);
-}
-
-
-content.then( content => {
-  this.state.locations[myKey].infoWindow.content = (contentForLocation);
-  this.state.locations[myKey].infoWindow.contentUrl = contentUrl;
-  this.forceUpdate()
-}
-
-
-)} // getInfoWindowContent
+} // getInfoWindowContent
 // end Nyt
 
 
@@ -203,12 +219,12 @@ updateQuery = (query) => {
           this.filterLocations(query);
 }
 
-
 render() {
  return (
   <div className="App">
         <NeighborhoodMap
         menuOpen = {this.state.menuOpen}
+        myAnimation = {this.state.myAnimation}
         locations = {this.state.locations}
         filteredLocationsOnly = {this.state.filteredLocationsOnly}
         query = {this.state.query}

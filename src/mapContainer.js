@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+import MenuAppBar from './MenuAppBar.js';
 
 export class MapContainer extends Component {
 
@@ -9,8 +10,17 @@ export class MapContainer extends Component {
     selectedPlace: []
   };
 
+componentDidMount(){
+
+
+
+
+}
+
   onMarkerClick = (props, marker, e) => {
-    this.props.showInfoWindowNow(props);
+    this.props.showInfoWindowNow(props, marker, e);
+    //console.log(this.props.google.maps.Animation);
+//    marker.setAnimation(this.props.google.maps.Animation.BOUNCE);
   }
 
   onInfoWindowClose = () => {
@@ -43,14 +53,46 @@ export class MapContainer extends Component {
     }))
   } //renderInfoWindow
 
-  renderMarkers() {
-    return (this.props.filteredLocationsOnly.map(location => {
-      return (<Marker key={location.key} animation={this.props.google.maps.Animation.DROP} title={location.title} position={location.position} onClick={this.onMarkerClick} name={location.title}/>)
-    }))
-  };
+renderMarkers() {
+ //   animation={this.props.google.maps.Animation.DROP}
 
-  render() {
+
+  try{
+      return (this.props.filteredLocationsOnly.map(location => {
+        return (<Marker
+          key={location.key}
+          animation= {this.props.google.maps.Animation.DROP}
+          title={location.title} position={location.position}
+          onClick={this.onMarkerClick}
+          name={location.title}/>)
+      }))
+
+  }catch(e){
+     console.log("Error",e)
+  }
+
+
+};
+
+
+
+render() {
+
     return (<div>
+
+      <MenuAppBar
+            google={this.props.google}
+            locations = {this.props.locations}
+            query = {this.props.query}
+            updateQuery = {this.props.updateQuery}
+            clearQuery = {this.props.clearQuery}
+            updatedFilteredLocations = {this.props.updatedFilteredLocations}
+            infoWindowStatus = {this.props.infoWindowStatus}
+            showInfoWindowNow = {this.props.showInfoWindowNow}
+            renderMarkers = {this.renderMarkers}
+            filteredLocationsOnly = {this.props.filteredLocationsOnly}
+            activeMarker = {this.state.activeMarker}
+      />
 
       <Map google={this.props.google}
            zoom={15}
